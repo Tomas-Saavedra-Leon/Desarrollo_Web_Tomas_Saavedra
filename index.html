@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Avistamiento de Aves - Chile</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .error { color: #c0392b; font-size: 0.85em; display: none; }
+        .error.visible { display: block; margin-bottom: 10px; }
+        .registro-item { border: 1px solid #ccc; padding: 10px; margin: 8px 0; border-radius: 4px; }
+        fieldset { margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        legend { font-weight: bold; color: #2c3e50; }
+        label { display: block; margin-top: 10px; }
+        input, select { margin-top: 5px; width: 100%; max-width: 300px; }
+        button { margin-top: 15px; padding: 8px 15px; background-color: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Registro de Avistamientos - Unión de Ornitólogos de Chile</h1>
+    </header>
+
+    <main>
+        <section id="seccion-voluntarios">
+            <h2>1. Registro de Voluntario</h2>
+            <form id="form-voluntario">
+                <fieldset>
+                    <legend>Datos de Contacto</legend>
+
+                    <label for="nombre-voluntario">Nombre completo:</label>
+                    <input type="text" id="nombre-voluntario">
+                    <span class="error" id="error-nombre-vol">Debe ingresar un nombre válido (mínimo 3 caracteres).</span>
+
+                    <label for="email-voluntario">Correo electrónico:</label>
+                    <input type="text" id="email-voluntario">
+                    <span class="error" id="error-email-vol">Debe ingresar un correo válido.</span>
+
+                    <label for="region-voluntario">Región:</label>
+                    <select id="region-voluntario">
+                        <option value="">-- Seleccione Región --</option>
+                        <option value="Arica y Parinacota">Arica y Parinacota</option>
+                        <option value="Tarapacá">Tarapacá</option>
+                        <option value="Antofagasta">Antofagasta</option>
+                        <option value="Atacama">Atacama</option>
+                        <option value="Coquimbo">Coquimbo</option>
+                        <option value="Valparaíso">Valparaíso</option>
+                        <option value="Metropolitana de Santiago">Metropolitana de Santiago</option>
+                        <option value="Libertador Gral. Bernardo O'Higgins">Libertador Gral. Bernardo O'Higgins</option>
+                        <option value="Maule">Maule</option>
+                        <option value="Ñuble">Ñuble</option>
+                        <option value="Biobío">Biobío</option>
+                        <option value="La Araucanía">La Araucanía</option>
+                        <option value="Los Ríos">Los Ríos</option>
+                        <option value="Los Lagos">Los Lagos</option>
+                        <option value="Aysén del Gral. Carlos Ibáñez del Campo">Aysén del Gral. Carlos Ibáñez del Campo</option>
+                        <option value="Magallanes y de la Antártica Chilena">Magallanes y de la Antártica Chilena</option>
+                    </select>
+                    <span class="error" id="error-region-vol">Debe seleccionar una región.</span>
+
+                    <label for="comuna-voluntario">Comuna:</label>
+                    <input type="text" id="comuna-voluntario">
+                    <span class="error" id="error-comuna-vol">Debe ingresar su comuna.</span>
+                </fieldset>
+                <button type="submit">Registrar Voluntario</button>
+            </form>
+            <div id="lista-voluntarios"></div>
+        </section>
+
+        <hr>
+
+        <section id="seccion-avistamientos">
+            <h2>2. Informar Avistamiento</h2>
+            <form id="form-avistamiento">
+                <fieldset>
+                    <legend>Detalles del Ave</legend>
+
+                    <label for="tipo-ave">Tipo de ave:</label>
+                    <input type="text" id="tipo-ave" placeholder="Ej: pato, rapaz, gaviota...">
+                    <span class="error" id="error-tipo-ave">Debe ingresar el tipo de ave.</span>
+
+                    <label for="nombre-ave">Nombre del ave:</label>
+                    <input type="text" id="nombre-ave">
+                    <span class="error" id="error-nombre-ave">Debe ingresar el nombre del ave.</span>
+
+                    <label for="lugar-ave">Lugar del avistamiento:</label>
+                    <input type="text" id="lugar-ave">
+                    <span class="error" id="error-lugar-ave">Debe ingresar el lugar.</span>
+
+                    <label for="fecha-ave">Fecha:</label>
+                    <input type="date" id="fecha-ave">
+                    <span class="error" id="error-fecha-ave">Ingrese una fecha válida (no futura).</span>
+
+                    <label for="hora-ave">Hora:</label>
+                    <input type="time" id="hora-ave">
+                    <span class="error" id="error-hora-ave">Debe ingresar la hora.</span>
+
+                    <label for="archivo-ave">Foto o Vídeo (Obligatorio):</label>
+                    <input type="file" id="archivo-ave" accept="image/*,video/*">
+                    <span class="error" id="error-archivo-ave">Debe adjuntar un archivo.</span>
+                </fieldset>
+                <button type="submit">Registrar Avistamiento</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <section id="seccion-listado">
+            <h2>3. Listado de Avistamientos</h2>
+            <fieldset>
+                <legend>Controles de Búsqueda</legend>
+
+                <label for="filtro-tipo">Buscar por tipo de ave:</label>
+                <input type="text" id="filtro-tipo" placeholder="Ej: pato, rapaz...">
+
+                <label for="orden-lista">Ordenar por:</label>
+                <select id="orden-lista">
+                    <option value="fecha-desc">Fecha (Más recientes primero)</option>
+                    <option value="fecha-asc">Fecha (Más antiguos primero)</option>
+                    <option value="lugar-asc">Lugar (A - Z)</option>
+                </select>
+            </fieldset>
+
+            <div id="contenedor-paginado"></div>
+
+            <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
+                <button id="btn-anterior">Anterior</button>
+                <span id="texto-pagina">Página 1</span>
+                <button id="btn-siguiente">Siguiente</button>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="seccion-metricas">
+            <h2>4. Indicadores y Métricas</h2>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; padding: 15px; border-radius: 5px;">
+                    <h3>Avistamientos por Tipo</h3>
+                    <p style="font-size: 0.9em; color: #666;">Total registrados: <span id="total-metricas-aves">0</span></p>
+                    <div id="grafico-avistamientos"></div>
+                </div>
+                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; padding: 15px; border-radius: 5px;">
+                    <h3>Voluntarios por Región</h3>
+                    <p style="font-size: 0.9em; color: #666;">Total registrados: <span id="total-metricas-voluntarios">0</span></p>
+                    <div id="grafico-voluntarios"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
