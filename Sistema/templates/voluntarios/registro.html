@@ -1,0 +1,83 @@
+{% extends "componentes/base.html" %}
+
+{% block contenido %}
+
+<div class="contenedor-formulario">
+    <h2>Registro de Nuevo Voluntario</h2>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="mensajes-flash">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('voluntarios_bp.registrar') }}" method="POST">
+
+        <div class="form-columnas">
+
+            <div class="columna-izquierda">
+
+                <div class="grupo-input">
+                    <label for="nombre-voluntario">Nombre Completo:</label>
+                    <input type="text" name="nombre-voluntario" id="nombre-voluntario"
+                           value="{{ nombre | default('') }}"
+                           placeholder="Ej: Juan Pérez" required minlength="3" maxlength="100">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="email-voluntario">Correo Electrónico:</label>
+                    <input type="email" name="email-voluntario" id="email-voluntario"
+                           value="{{ email | default('') }}"
+                           placeholder="ejemplo@correo.cl" required maxlength="100">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="telefono-voluntario">Teléfono de Contacto:</label>
+                    <input type="text" name="telefono-voluntario" id="telefono-voluntario"
+                           value="{{ telefono | default('') }}"
+                           placeholder="Ej: +56912345678" required maxlength="15">
+                </div>
+
+            </div>
+
+            <div class="columna-derecha">
+
+                <div class="grupo-input">
+                    <label for="region-voluntario">Región:</label>
+                    <select name="region-voluntario" id="region-voluntario" required>
+                        <option value="">Seleccione una región</option>
+                        {% for region in regiones %}
+                            <option value="{{ region.id }}">{{ region.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="comuna-voluntario">Comuna:</label>
+                    <select name="comuna-voluntario" id="comuna-voluntario" required>
+                        <option value="">Seleccione una comuna</option>
+                        {% for comuna in comunas %}
+                            <option value="{{ comuna.id }}" data-region="{{ comuna.region_id }}">{{ comuna.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="grupo-input">
+            <button type="submit" class="btn-principal">Registrar Voluntario</button>
+        </div>
+
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/valida_voluntario.js') }}"></script>
+
+{% endblock %}

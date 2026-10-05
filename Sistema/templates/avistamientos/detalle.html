@@ -1,0 +1,55 @@
+
+{% extends "componentes/base.html" %}
+
+{% block contenido %}
+
+<div class="contenedor-detalle">
+
+
+    <h2>Detalle del Avistamiento #{{ avistamiento.id }}</h2>
+
+    <div class="info-avistamiento">
+        <h3>Información General</h3>
+        <p><strong>Fecha:</strong> {{ avistamiento.fecha }}</p>
+        <p><strong>Hora:</strong> {{ avistamiento.hora }}</p>
+        <p><strong>Lugar:</strong> {{ avistamiento.lugar }}</p>
+        <p><strong>Ave Avistada:</strong> {{ avistamiento.ave.nombre }} ({{ avistamiento.ave.tipo }})</p>
+
+        <p><strong>Registrado por:</strong> {{ avistamiento.voluntario.nombre }}</p>
+    </div>
+    <div class="evidencia-avistamiento">
+        <h3>Evidencia (Fotos y Videos)</h3>
+
+        {% if avistamiento.registros %}
+
+            <div class="galeria-evidencia">
+                {% for registro in avistamiento.registros %}
+
+                    {% if registro.ruta_archivo.endswith('.mp4') or registro.ruta_archivo.endswith('.webm') or registro.ruta_archivo.endswith('.avi') %}
+
+                        <video controls class="evidencia-video">
+                            <source src="{{ url_for('static', filename='archivos_subidos/' ~ registro.ruta_archivo) }}" type="video/mp4">
+                            Tu navegador no soporta la reproducción de video.
+                        </video>
+
+                    {% else %}
+
+                        <img src="{{ url_for('static', filename='archivos_subidos/' ~ registro.ruta_archivo) }}" alt="Evidencia del avistamiento" class="evidencia-imagen">
+
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <p>No hay evidencia adjunta para este avistamiento.</p>
+        {% endif %}
+    </div>
+
+    <div class="acciones-detalle">
+        <a href="{{ url_for('avistamientos_bp.listado') }}" class="btn-secundario">&laquo; Volver al Listado</a>
+    </div>
+
+</div>
+
+{% endblock %}

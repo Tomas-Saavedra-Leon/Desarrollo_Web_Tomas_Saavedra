@@ -1,0 +1,25 @@
+{% extends "componentes/base.html" %}
+
+{% block contenido %}
+
+<div class="contenedor-exito">
+
+    <h2>¡Registro Exitoso!</h2>
+
+    <p>El voluntario <strong>{{ voluntario.nombre }}</strong> ha sido ingresado correctamente al sistema.</p>
+
+    <div class="acciones-exito">
+
+        <a href="{{ url_for('avistamientos_bp.registrar') }}" class="btn-principal">
+            Registrar Avistamiento
+        </a>
+
+        <a href="{{ url_for('inicio_bp.portada') }}" class="btn-secundario">
+            Continuar al Inicio
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

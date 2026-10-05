@@ -1,0 +1,16 @@
+<nav class="cabecera-principal">
+    <div class="nav-izquierda">
+        <a href="{{ url_for('inicio_bp.portada') }}" class="btn-inicio">Inicio</a>
+    </div>
+
+    <div class="nav-derecha">
+        <div class="dropdown">
+            <button class="dropbtn">Menú de Acciones ▼</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('voluntarios_bp.registrar') }}">Registrar Voluntario</a>
+                <a href="{{ url_for('avistamientos_bp.registrar') }}">Registrar Avistamiento</a>
+                <a href="{{ url_for('avistamientos_bp.listado') }}">Listado de Avistamientos</a>
+            </div>
+        </div>
+    </div>
+</nav>

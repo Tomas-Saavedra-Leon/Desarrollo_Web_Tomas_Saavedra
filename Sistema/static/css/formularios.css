@@ -1,0 +1,82 @@
+.contenedor-formulario {
+    background-color: var(--tierra);
+    border: 3px solid var(--madera-clara);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.contenedor-formulario h2 {
+    color: var(--bosque-oscuro);
+    border-bottom: 2px solid var(--hoja-verde);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.form-columnas {
+    display: flex;
+    gap: 40px;
+}
+
+.columna-izquierda, .columna-derecha {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-input label {
+    font-weight: bold;
+    color: var(--tronco-oscuro);
+    margin-bottom: 5px;
+}
+
+.grupo-input input,
+.grupo-input select,
+.grupo-input textarea {
+    border: 2px solid var(--madera-clara);
+    background-color: var(--blanco);
+    border-radius: 4px;
+    padding: 10px;
+    color: var(--tronco-oscuro);
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+    outline: none;
+    border-color: var(--hoja-verde);
+    box-shadow: 0 0 5px var(--hoja-verde);
+}
+
+.btn-principal {
+    background-color: var(--tronco-oscuro);
+    color: var(--blanco);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.btn-principal:hover {
+    background-color: var(--bosque-oscuro);
+}
+
+.mensajes-flash {
+    background-color: var(--madera-clara);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    list-style: none;
+    margin-bottom: 20px;
+}

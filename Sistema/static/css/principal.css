@@ -1,0 +1,104 @@
+:root {
+    --bosque-oscuro: #2d4c1e;
+    --hoja-verde: #4c8c2a;
+    --verde-claro: #e8f5e9;
+    --tronco-oscuro: #4e342e;
+    --madera-clara: #8d6e63;
+    --tierra: #d7ccc8;
+    --blanco: #ffffff;
+}
+
+body {
+    background-color: var(--verde-claro);
+    color: var(--tronco-oscuro);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.cabecera-principal {
+    background-color: var(--bosque-oscuro);
+    border-bottom: 4px solid var(--hoja-verde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.nav-izquierda .btn-inicio {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 8px 15px;
+    background-color: var(--hoja-verde);
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-izquierda .btn-inicio:hover {
+    background-color: var(--tronco-oscuro);
+}
+
+.nav-derecha .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: var(--madera-clara);
+    color: var(--blanco);
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--bosque-oscuro);
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.dropdown-content a {
+    color: var(--blanco);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid var(--hoja-verde);
+}
+
+.dropdown-content a:hover {
+    background-color: var(--tronco-oscuro);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--tronco-oscuro);
+}
+
+.pie-pagina {
+    background-color: var(--bosque-oscuro);
+    color: var(--verde-claro);
+    text-align: center;
+    padding: 20px;
+    border-top: 6px solid var(--hoja-verde);
+    margin-top: 40px;
+}
+
+
+.text-center { text-align: center; }
+.unete-link { margin-top: 30px; font-size: 1.2rem; }
+.unete-link a { color: var(--hoja-verde); font-weight: bold; text-decoration: none; }
+.unete-link a:hover { color: var(--bosque-oscuro); text-decoration: underline; }
