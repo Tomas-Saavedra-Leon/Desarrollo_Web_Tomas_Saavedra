@@ -1,36 +1,56 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     const formulario = document.querySelector("form");
+    const selectRegion = document.getElementById("region-voluntario");
+    const selectComuna = document.getElementById("comuna-voluntario");
 
-    formulario.addEventListener("submit", function(evento) {
+    if (selectRegion && selectComuna) {
+        const todasLasComunas = Array.from(selectComuna.querySelectorAll("option"));
 
-        let errores = [];
+        selectRegion.addEventListener("change", function() {
+            const regionId = this.value;
 
-        const nombre = document.getElementById("nombre-voluntario").value.trim();
-        const email = document.getElementById("email-voluntario").value.trim();
-        const region = document.getElementById("region-voluntario").value;
-        const comuna = document.getElementById("comuna-voluntario").value;
+            selectComuna.innerHTML = '<option value="">Seleccione una comuna</option>';
 
-        if (nombre.length < 3) {
-            errores.push("Error: El nombre debe tener al menos 3 caracteres.");
-        }
+            if (regionId !== "") {
+                todasLasComunas.forEach(opcion => {
+                    if (opcion.dataset.region === regionId) {
+                        selectComuna.appendChild(opcion.cloneNode(true));
+                    }
+                });
+            }
+        });
+    }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            errores.push("Error: Ingrese un correo electrónico válido.");
-        }
+    if (formulario) {
+        formulario.addEventListener("submit", function(evento) {
+            let errores = [];
 
-        if (region === "") {
-            errores.push("Error: Debe seleccionar una región.");
-        }
-        if (comuna === "") {
-            errores.push("Error: Debe seleccionar una comuna.");
-        }
+            const nombre = document.getElementById("nombre-voluntario").value.trim();
+            const email = document.getElementById("email-voluntario").value.trim();
+            const region = selectRegion ? selectRegion.value : "";
+            const comuna = selectComuna ? selectComuna.value : "";
 
-        if (errores.length > 0) {
-            evento.preventDefault();
+            if (nombre.length < 3) {
+                errores.push("Error: El nombre debe tener al menos 3 caracteres.");
+            }
 
-            alert(errores.join("\n"));
-        }
-    });
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errores.push("Error: Ingrese un correo electrónico válido.");
+            }
+
+            if (region === "") {
+                errores.push("Error: Debe seleccionar una región.");
+            }
+            if (comuna === "") {
+                errores.push("Error: Debe seleccionar una comuna.");
+            }
+
+            if (errores.length > 0) {
+                evento.preventDefault();
+                alert(errores.join("\n"));
+            }
+        });
+    }
 });

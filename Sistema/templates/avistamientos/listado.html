@@ -22,7 +22,11 @@
                     {% for avistamiento in paginacion.items %}
                     <tr style="border-bottom: 1px solid var(--tierra);">
                         <td style="padding: 12px; color: var(--tronco-oscuro);">{{ avistamiento.fecha_hora }}</td>
-                        <td style="padding: 12px; font-weight: bold; color: var(--bosque-oscuro);">{{ avistamiento.ave.nombre }}</td>
+                        <td style="padding: 12px; font-weight: bold; color: var(--bosque-oscuro);">
+                            <a href="{{ url_for('avistamientos_bp.detalle', id=avistamiento.id) }}" style="color: var(--bosque-oscuro); text-decoration: underline;">
+                                {{ avistamiento.ave.nombre }}
+                            </a>
+                        </td>
                         <td style="padding: 12px; color: var(--tronco-oscuro);">{{ avistamiento.lugar }}</td>
                         <td style="padding: 12px; color: var(--tronco-oscuro);">{{ avistamiento.voluntario.nombre }}</td>
                     </tr>
@@ -32,25 +36,25 @@
 
             <div class="paginacion text-center" style="margin-top: 30px;">
                 {% if paginacion.has_prev %}
-                    <a href="{{ url_for('avistamientos_bp.listado', page=paginacion.prev_num) }}" 
+                    <a href="{{ url_for('avistamientos_bp.listado', page=paginacion.prev_num) }}"
                        class="btn-principal" style="display: inline-block; width: auto; padding: 8px 15px; margin-right: 10px; text-decoration: none;">
                        &laquo; Anterior
                     </a>
                 {% endif %}
-                
+
                 <span style="font-weight: bold; color: var(--bosque-oscuro); margin: 0 10px; font-size: 1.1rem;">
                     Página {{ paginacion.page }} de {{ paginacion.pages }}
                 </span>
-                
+
                 {% if paginacion.has_next %}
-                    <a href="{{ url_for('avistamientos_bp.listado', page=paginacion.next_num) }}" 
+                    <a href="{{ url_for('avistamientos_bp.listado', page=paginacion.next_num) }}"
                        class="btn-principal" style="display: inline-block; width: auto; padding: 8px 15px; margin-left: 10px; text-decoration: none;">
                        Siguiente &raquo;
                     </a>
                 {% endif %}
-                
+
             </div>
-            
+
         {% else %}
             <p class="text-center" style="margin: 40px 0; color: var(--tronco-oscuro); font-size: 1.2rem;">
                 Aún no hay avistamientos registrados en el sistema.

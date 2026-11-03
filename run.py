@@ -1,10 +1,6 @@
-
-from Sistema import create_app
-
+from Sistema import create_app, db
 
 app = create_app()
 
-
 if __name__ == '__main__':
-
     app.run(debug=True)

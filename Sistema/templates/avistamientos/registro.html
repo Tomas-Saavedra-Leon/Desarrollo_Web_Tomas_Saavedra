@@ -17,10 +17,7 @@
     <form action="{{ url_for('avistamientos_bp.registrar') }}" method="POST" enctype="multipart/form-data">
 
         <div class="form-columnas">
-
-
             <div class="columna-izquierda">
-
                 <div class="grupo-input">
                     <label for="voluntario-id">Voluntario:</label>
                     <select name="voluntario-id" id="voluntario-id" required>
@@ -45,11 +42,9 @@
                     <label for="foto-video">Subir Foto o Video:</label>
                     <input type="file" name="foto-video" id="foto-video" accept="image/*,video/*" required>
                 </div>
-
             </div>
 
             <div class="columna-derecha">
-
                 <div class="grupo-input">
                     <label for="lugar-avistamiento">Lugar:</label>
                     <input type="text" name="lugar-avistamiento" id="lugar-avistamiento"
@@ -65,11 +60,9 @@
                     <label for="descripcion-avistamiento">Descripción (Opcional):</label>
                     <textarea name="descripcion-avistamiento" id="descripcion-avistamiento"
                               rows="4" maxlength="500"
-                              placeholder="Ej: El ave estaba posada sobre la rama más alta de un roble..."></textarea>
+                              placeholder="Ej: El ave estaba posada sobre la rama..."></textarea>
                 </div>
-
             </div>
-
         </div>
 
         <div class="grupo-input" style="margin-top: 20px;">
@@ -80,5 +73,4 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/valida_avistamientos.js') }}"></script>
-
 {% endblock %}

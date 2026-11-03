@@ -7,7 +7,7 @@ from Sistema.models.voluntario import Voluntario
 from Sistema.models.ave import Ave
 from Sistema.utils.validadores import sanitizar_texto
 from Sistema.utils.archivos import guardar_archivo
-
+from Sistema.models.comentario import Comentario
 avistamientos_bp = Blueprint('avistamientos_bp', __name__)
 
 
@@ -80,3 +80,42 @@ def listado():
                                                                                                    per_page=5,
                                                                                                    error_out=False)
     return render_template('avistamientos/listado.html', paginacion=avistamientos_paginados)
+
+@avistamientos_bp.route('/api/comentarios/<int:avistamiento_id>', methods=['GET'])
+def obtener_comentarios(avistamiento_id):
+    comentarios = Comentario.query.filter_by(avistamiento_id=avistamiento_id).order_by(Comentario.fecha.desc()).all()
+    data = [{
+        'nombre': c.nombre,
+        'texto': c.texto,
+        'fecha': c.fecha.strftime('%Y-%m-%d %H:%M:%S')
+    } for c in comentarios]
+    return jsonify(data)
+
+@avistamientos_bp.route('/api/comentarios', methods=['POST'])
+def agregar_comentario():
+    data = request.get_json()
+    avistamiento_id = data.get('avistamiento_id')
+    nombre = data.get('nombre')
+    texto = data.get('texto')
+
+    if not nombre or len(nombre) < 3 or len(nombre) > 50:
+        return jsonify({'error': 'Nombre inválido'}), 400
+
+    if not texto or len(texto) < 5:
+        return jsonify({'error': 'Texto inválido'}), 400
+
+    nuevo_comentario = Comentario(
+        nombre=nombre,
+        texto=texto,
+        avistamiento_id=int(avistamiento_id),
+        fecha=datetime.now()
+    )
+    db.session.add(nuevo_comentario)
+    db.session.commit()
+
+    return jsonify({'mensaje': 'Comentario agregado'}), 201
+
+@avistamientos_bp.route('/avistamiento/<int:id>')
+def detalle(id):
+    avistamiento = Avistamiento.query.get_or_404(id)
+    return render_template('avistamientos/detalle.html', avistamiento=avistamiento)
