@@ -1,16 +1,18 @@
 {% extends "componentes/base.html" %}
 
 {% block contenido %}
-<div class="contenedor-estadisticas">
-    
-    <div id="grafico-lineas" style="width:100%; height:400px; margin-bottom: 40px;"></div>
-    
-    <div id="grafico-torta" style="width:100%; height:400px; margin-bottom: 40px;"></div>
-    
-    <div id="grafico-barras" style="width:100%; height:400px; margin-bottom: 40px;"></div>
+<div class="contenedor-formulario contenedor-ancho">
 
-    <div style="margin-top: 30px; text-align: center;">
-        <a href="{{ url_for('inicio_bp.portada') }}" class="btn-principal">Volver a la portada del sistema</a>
+    <h2 class="text-center titulo-seccion">Estadísticas del Sistema</h2>
+
+    <div id="grafico-lineas" class="grafico-contenedor"></div>
+
+    <div id="grafico-torta" class="grafico-contenedor"></div>
+
+    <div id="grafico-barras" class="grafico-contenedor"></div>
+
+    <div class="boton-contenedor text-center">
+        <a href="{{ url_for('inicio_bp.portada') }}" class="btn-principal enlace-boton">Volver a la portada</a>
     </div>
 
 </div>

@@ -1,34 +1,46 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     const formulario = document.querySelector("form");
+    if (!formulario) {
+        return;
+    }
 
     formulario.addEventListener("submit", function(evento) {
         let errores = [];
 
-        const voluntario = document.getElementById("voluntario_id").value;
-        const ave = document.getElementById("ave_id").value;
-        const lugar = document.getElementById("lugar").value.trim();
-        const fecha = document.getElementById("fecha").value;
-        const hora = document.getElementById("hora").value;
+        const voluntario = document.getElementById("voluntario-id");
+        const ave = document.getElementById("ave-avistamiento");
+        const lugar = document.getElementById("lugar-avistamiento");
+        const fechaHora = document.getElementById("fecha-hora");
+        const inputArchivos = document.getElementById("foto-video");
 
-        const archivo = document.getElementById("archivo").files[0];
+        if (!voluntario || voluntario.value === "") {
+            errores.push("Debe seleccionar un voluntario responsable.");
+        }
 
-        if (voluntario === "") errores.push("Debe seleccionar un voluntario responsable.");
-        if (ave === "") errores.push("Debe seleccionar el ave avistada.");
+        if (!ave || ave.value === "") {
+            errores.push("Debe seleccionar el ave avistada.");
+        }
 
-        if (lugar.length < 3) errores.push("El lugar del avistamiento debe ser más descriptivo (mín. 3 letras).");
+        if (!lugar || lugar.value.trim().length < 3) {
+            errores.push("El lugar del avistamiento debe tener al menos 3 caracteres.");
+        }
 
-        if (fecha === "") errores.push("Debe ingresar la fecha del avistamiento.");
-        if (hora === "") errores.push("Debe ingresar la hora del avistamiento.");
+        if (!fechaHora || fechaHora.value === "") {
+            errores.push("Debe ingresar la fecha y hora del avistamiento.");
+        }
 
-        if (!archivo) {
-            errores.push("Es obligatorio adjuntar una foto o video como evidencia.");
+        if (!inputArchivos || inputArchivos.files.length === 0) {
+            errores.push("Debe adjuntar al menos un archivo (foto o video) como evidencia.");
+        } else if (inputArchivos.files.length > 5) {
+            errores.push("Solo se permite un máximo de 5 archivos por avistamiento.");
         } else {
-            const nombreArchivo = archivo.name.toLowerCase();
-            const extensionesValidas = /\.(png|jpg|jpeg|gif|mp4|avi|mov|webm)$/;
-
-            if (!nombreArchivo.match(extensionesValidas)) {
-                errores.push("El archivo no es válido. Solo se permiten imágenes (png, jpg, gif) o videos (mp4, avi, mov).");
+            const extensionesValidas = /\.(png|jpg|jpeg|gif|mp4|avi|mov|webm)$/i;
+            for (let i = 0; i < inputArchivos.files.length; i++) {
+                const nombreArchivo = inputArchivos.files[i].name.toLowerCase();
+                if (!nombreArchivo.match(extensionesValidas)) {
+                    errores.push(`El archivo "${inputArchivos.files[i].name}" tiene una extensión no permitida.`);
+                    break;
+                }
             }
         }
 

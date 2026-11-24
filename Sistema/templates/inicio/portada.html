@@ -7,18 +7,25 @@
 
     <h2 class="text-center">Últimos registrados</h2>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="mensajes-flash">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <div class="lista-ultimos-avistamientos">
         {% if avistamientos %}
-
             {% for avistamiento in avistamientos %}
-                <div class="tarjeta-avistamiento" style="background-color: var(--blanco); border: 2px solid var(--madera-clara); border-radius: 8px; padding: 20px; margin: 20px auto; max-width: 600px;">
-
-                    <h3 style="color: var(--bosque-oscuro); border-bottom: 1px solid var(--hoja-verde); padding-bottom: 5px;">
+                <div class="tarjeta-avistamiento">
+                    <h3 class="titulo-tarjeta-ave">
                         {{ avistamiento.ave.nombre }}
                     </h3>
 
                     <p><strong>Fecha y Hora:</strong> {{ avistamiento.fecha_hora }}</p>
-
                     <p><strong>Lugar:</strong> {{ avistamiento.lugar }}</p>
 
                     {% if avistamiento.descripcion %}
@@ -28,9 +35,8 @@
                     <p><small><em>Registrado por: {{ avistamiento.voluntario.nombre }}</em></small></p>
                 </div>
             {% endfor %}
-
         {% else %}
-            <p class="text-center" style="margin: 40px 0; color: var(--tronco-oscuro);">
+            <p class="text-center mensaje-vacio">
                 Aún no hay avistamientos registrados en el sistema.
             </p>
         {% endif %}

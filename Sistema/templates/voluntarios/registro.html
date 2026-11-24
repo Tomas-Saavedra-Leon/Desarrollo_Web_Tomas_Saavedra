@@ -5,7 +5,6 @@
 <div class="contenedor-formulario">
     <h2>Registro de Nuevo Voluntario</h2>
 
-
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul class="mensajes-flash">
@@ -52,7 +51,7 @@
                     <select name="region-voluntario" id="region-voluntario" required>
                         <option value="">Seleccione una región</option>
                         {% for region in regiones %}
-                            <option value="{{ region.id }}">{{ region.nombre }}</option>
+                            <option value="{{ region.id }}" {% if region_seleccionada == region.id %}selected{% endif %}>{{ region.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -62,7 +61,7 @@
                     <select name="comuna-voluntario" id="comuna-voluntario" required>
                         <option value="">Seleccione una comuna</option>
                         {% for comuna in comunas %}
-                            <option value="{{ comuna.id }}" data-region="{{ comuna.region_id }}">{{ comuna.nombre }}</option>
+                            <option value="{{ comuna.id }}" data-region="{{ comuna.region_id }}" {% if comuna_seleccionada == comuna.id %}selected{% endif %}>{{ comuna.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>

@@ -1,38 +1,53 @@
-
-.contenedor-listado {
-    max-width: 1000px;
-    margin: 30px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
 .tabla-avistamientos {
     width: 100%;
     border-collapse: collapse;
+    background-color: var(--blanco);
+    border: 2px solid var(--madera-clara);
+    border-radius: 8px;
+    overflow: hidden;
     margin-top: 20px;
 }
 
 .tabla-avistamientos th {
-    background-color: #34495e;
-    color: white;
-    padding: 15px;
+    background-color: var(--hoja-verde);
+    color: var(--blanco);
+    padding: 12px 15px;
     text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid var(--bosque-oscuro);
+}
+
+.tabla-avistamientos td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--tierra);
+    color: var(--tronco-oscuro);
+}
+
+.tabla-avistamientos tbody tr.fila-avistamiento {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.tabla-avistamientos tbody tr.fila-avistamiento:hover {
+    background-color: var(--verde-claro);
+}
+
+.tabla-avistamientos tbody tr.fila-avistamiento:focus {
+    outline: 2px solid var(--hoja-verde);
+    background-color: var(--verde-claro);
+}
+
+.columna-ave {
     font-weight: bold;
 }
 
-
-.tabla-avistamientos td {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    color: #333;
+.enlace-detalle {
+    color: var(--bosque-oscuro);
+    text-decoration: underline;
 }
 
-
-.tabla-avistamientos tbody tr:hover {
-    background-color: #f1f8ff;
-    transition: background-color 0.2s;
+.enlace-detalle:hover {
+    color: var(--hoja-verde);
 }
 
 .paginacion {
@@ -40,24 +55,19 @@
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    gap: 20px;
+    gap: 15px;
 }
 
-.btn-paginacion {
-    background-color: #3498db;
-    color: white;
+.btn-paginador {
+    display: inline-block;
+    width: auto;
+    padding: 8px 16px;
     text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    font-size: 0.95rem;
 }
 
-.btn-paginacion:hover {
-    background-color: #2980b9;
-}
-
-.info-pagina {
+.info-paginacion {
     font-weight: bold;
-    color: #555;
+    color: var(--bosque-oscuro);
+    font-size: 1.05rem;
 }

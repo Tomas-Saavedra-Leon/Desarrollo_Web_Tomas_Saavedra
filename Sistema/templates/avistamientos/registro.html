@@ -23,7 +23,7 @@
                     <select name="voluntario-id" id="voluntario-id" required>
                         <option value="">Seleccione voluntario</option>
                         {% for voluntario in voluntarios %}
-                            <option value="{{ voluntario.id }}">{{ voluntario.nombre }}</option>
+                            <option value="{{ voluntario.id }}" {% if voluntario_seleccionado == voluntario.id %}selected{% endif %}>{{ voluntario.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -33,14 +33,14 @@
                     <select name="ave-avistamiento" id="ave-avistamiento" required>
                         <option value="">Seleccione un ave</option>
                         {% for ave in aves %}
-                            <option value="{{ ave.id }}">{{ ave.nombre }}</option>
+                            <option value="{{ ave.id }}" {% if ave_seleccionada == ave.id %}selected{% endif %}>{{ ave.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>
 
                 <div class="grupo-input">
-                    <label for="foto-video">Subir Foto o Video:</label>
-                    <input type="file" name="foto-video" id="foto-video" accept="image/*,video/*" required>
+                    <label for="foto-video">Subir Fotos o Videos (1 a 5):</label>
+                    <input type="file" name="foto-video" id="foto-video" accept="image/*,video/*" multiple required>
                 </div>
             </div>
 
@@ -48,29 +48,31 @@
                 <div class="grupo-input">
                     <label for="lugar-avistamiento">Lugar:</label>
                     <input type="text" name="lugar-avistamiento" id="lugar-avistamiento"
+                           value="{{ lugar | default('') }}"
                            placeholder="Ej: Parque Nacional Conguillío" required maxlength="200">
                 </div>
 
                 <div class="grupo-input">
                     <label for="fecha-hora">Fecha y Hora:</label>
-                    <input type="datetime-local" name="fecha-hora" id="fecha-hora" required>
+                    <input type="datetime-local" name="fecha-hora" id="fecha-hora"
+                           value="{{ fecha_hora | default('') }}" required>
                 </div>
 
                 <div class="grupo-input">
                     <label for="descripcion-avistamiento">Descripción (Opcional):</label>
                     <textarea name="descripcion-avistamiento" id="descripcion-avistamiento"
                               rows="4" maxlength="500"
-                              placeholder="Ej: El ave estaba posada sobre la rama..."></textarea>
+                              placeholder="Ej: El ave estaba posada sobre la rama...">{{ descripcion | default('') }}</textarea>
                 </div>
             </div>
         </div>
 
-        <div class="grupo-input" style="margin-top: 20px;">
+        <div class="grupo-input boton-contenedor">
             <button type="submit" class="btn-principal">Registrar Avistamiento</button>
         </div>
 
     </form>
 </div>
 
-<script src="{{ url_for('static', filename='js/valida_avistamientos.js') }}"></script>
+<script src="{{ url_for('static', filename='js/valida_avistamiento.js') }}"></script>
 {% endblock %}

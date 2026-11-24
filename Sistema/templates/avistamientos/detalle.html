@@ -1,56 +1,54 @@
-
 {% extends "componentes/base.html" %}
 
 {% block contenido %}
 
-<div class="contenedor-detalle">
-
+<div class="contenedor-formulario contenedor-ancho">
 
     <h2>Detalle del Avistamiento #{{ avistamiento.id }}</h2>
 
     <div class="info-avistamiento">
         <h3>Información General</h3>
-        <p><strong>Fecha:</strong> {{ avistamiento.fecha }}</p>
-        <p><strong>Hora:</strong> {{ avistamiento.hora }}</p>
+        <p><strong>Fecha y Hora:</strong> {{ avistamiento.fecha_hora.strftime('%d/%m/%Y %H:%M') if avistamiento.fecha_hora else '' }}</p>
         <p><strong>Lugar:</strong> {{ avistamiento.lugar }}</p>
         <p><strong>Ave Avistada:</strong> {{ avistamiento.ave.nombre }}</p>
-
         <p><strong>Registrado por:</strong> {{ avistamiento.voluntario.nombre }}</p>
+        {% if avistamiento.descripcion %}
+            <p><strong>Descripción:</strong> {{ avistamiento.descripcion }}</p>
+        {% endif %}
     </div>
+
     <div class="evidencia-avistamiento">
         <h3>Evidencia (Fotos y Videos)</h3>
 
         {% if avistamiento.registros %}
-
             <div class="galeria-evidencia">
                 {% for registro in avistamiento.registros %}
-
-                    {% if registro.ruta_archivo.endswith('.mp4') or registro.ruta_archivo.endswith('.webm') or registro.ruta_archivo.endswith('.avi') %}
-
-                        <video controls class="evidencia-video">
-                            <source src="{{ url_for('static', filename='archivos_subidos/' ~ registro.ruta_archivo) }}" type="video/mp4">
-                            Tu navegador no soporta la reproducción de video.
-                        </video>
-
+                    {% set ext = registro.ruta_archivo.split('.')[-1].lower() %}
+                    {% if ext in ['mp4', 'webm', 'avi', 'mov'] %}
+                        <div class="item-evidencia">
+                            <video controls class="evidencia-video" aria-label="Video del avistamiento de {{ avistamiento.ave.nombre }}">
+                                <source src="{{ url_for('static', filename='archivos_subidos/' ~ registro.ruta_archivo) }}" type="video/{{ 'mp4' if ext == 'mp4' else ('webm' if ext == 'webm' else ext) }}">
+                                <p>Tu navegador no soporta la reproducción del video {{ registro.nombre_archivo }}.</p>
+                            </video>
+                        </div>
                     {% else %}
-
-                        <img src="{{ url_for('static', filename='archivos_subidos/' ~ registro.ruta_archivo) }}" alt="Evidencia del avistamiento" class="evidencia-imagen">
-
+                        <div class="item-evidencia">
+                            <img src="{{ url_for('static', filename='archivos_subidos/' ~ registro.ruta_archivo) }}" alt="Fotografía del avistamiento de {{ avistamiento.ave.nombre }} en {{ avistamiento.lugar }}" class="evidencia-imagen">
+                        </div>
                     {% endif %}
-
                 {% endfor %}
             </div>
-
         {% else %}
             <p>No hay evidencia adjunta para este avistamiento.</p>
         {% endif %}
     </div>
-    <div class="seccion-comentarios" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--hoja-verde);">
+
+    <div class="seccion-comentarios">
         <h3>Comentarios</h3>
 
-        <div class="formulario-comentario" style="background-color: var(--madera-clara); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <div class="formulario-comentario">
             <h4>Agregar un Comentario</h4>
-            <div id="mensaje-feedback" style="display: none; padding: 10px; margin-bottom: 15px; border-radius: 4px;"></div>
+            <div id="mensaje-feedback" class="mensaje-feedback-oculto"></div>
 
             <form id="form-comentario">
                 <input type="hidden" id="comentario-avistamiento-id" value="{{ avistamiento.id }}">
@@ -62,7 +60,7 @@
 
                 <div class="grupo-input">
                     <label for="comentario-texto">Comentario:</label>
-                    <textarea id="comentario-texto" required minlength="5" rows="3" cols="40" placeholder="Escriba su comentario (al menos 5 caracteres)..."></textarea>
+                    <textarea id="comentario-texto" required minlength="5" maxlength="300" rows="3" cols="40" placeholder="Escriba su comentario (al menos 5 caracteres)..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-principal" id="btn-enviar-comentario">Agregar comentario</button>

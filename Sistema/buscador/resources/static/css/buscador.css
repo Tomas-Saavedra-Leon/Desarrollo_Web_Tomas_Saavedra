@@ -1,0 +1,293 @@
+:root {
+    --bosque-oscuro: #2d4c1e;
+    --hoja-verde: #4c8c2a;
+    --verde-claro: #e8f5e9;
+    --tronco-oscuro: #4e342e;
+    --madera-clara: #8d6e63;
+    --tierra: #d7ccc8;
+    --blanco: #ffffff;
+    --mark-bg: #ffe082;
+    --mark-texto: #2e1e05;
+    --alerta-error-bg: #f8d7da;
+    --alerta-error-texto: #721c24;
+    --alerta-exito-bg: #d4edda;
+    --alerta-exito-texto: #155724;
+}
+
+body {
+    background-color: var(--verde-claro);
+    color: var(--tronco-oscuro);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.cabecera-principal {
+    background-color: var(--bosque-oscuro);
+    border-bottom: 4px solid var(--hoja-verde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.logo-titulo {
+    color: var(--blanco);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.btn-nav {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    background-color: var(--hoja-verde);
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-nav:hover {
+    background-color: var(--tronco-oscuro);
+}
+
+.contenido-central {
+    min-height: 70vh;
+    padding: 20px;
+}
+
+.contenedor-tarjeta {
+    background-color: var(--tierra);
+    border: 3px solid var(--madera-clara);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.titulo-seccion {
+    color: var(--bosque-oscuro);
+    border-bottom: 2px solid var(--hoja-verde);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.formulario-busqueda {
+    margin-bottom: 30px;
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-input label {
+    font-weight: bold;
+    color: var(--tronco-oscuro);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.grupo-input input,
+.grupo-input select {
+    border: 2px solid var(--madera-clara);
+    background-color: var(--blanco);
+    border-radius: 4px;
+    padding: 12px 15px;
+    color: var(--tronco-oscuro);
+    font-size: 1.05rem;
+    font-family: inherit;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+    outline: none;
+    border-color: var(--hoja-verde);
+    box-shadow: 0 0 5px var(--hoja-verde);
+}
+
+.mensaje-estado {
+    padding: 20px;
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--tronco-oscuro);
+    background-color: var(--blanco);
+    border: 1px dashed var(--madera-clara);
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+.tabla-avistamientos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--blanco);
+    border: 2px solid var(--madera-clara);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.tabla-oculta {
+    display: none;
+}
+
+.tabla-avistamientos th {
+    background-color: var(--hoja-verde);
+    color: var(--blanco);
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid var(--bosque-oscuro);
+}
+
+.tabla-avistamientos td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--tierra);
+    color: var(--tronco-oscuro);
+    vertical-align: middle;
+}
+
+.tabla-avistamientos tbody tr:hover {
+    background-color: var(--verde-claro);
+}
+
+.resaltado-busqueda {
+    background-color: var(--mark-bg);
+    color: var(--mark-texto);
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 1px 4px;
+}
+
+.celda-promedio {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--bosque-oscuro);
+}
+
+.btn-evaluar {
+    background-color: var(--hoja-verde);
+    color: var(--blanco);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.btn-evaluar:hover {
+    background-color: var(--bosque-oscuro);
+}
+
+.btn-principal {
+    background-color: var(--tronco-oscuro);
+    color: var(--blanco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.btn-principal:hover {
+    background-color: var(--bosque-oscuro);
+}
+
+.btn-secundario {
+    background-color: var(--madera-clara);
+    color: var(--blanco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.btn-secundario:hover {
+    background-color: var(--tronco-oscuro);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-oculto {
+    display: none;
+}
+
+.modal-caja {
+    background-color: var(--blanco);
+    border: 3px solid var(--hoja-verde);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-titulo {
+    color: var(--bosque-oscuro);
+    margin-top: 0;
+    border-bottom: 2px solid var(--hoja-verde);
+    padding-bottom: 8px;
+}
+
+.modal-descripcion {
+    color: var(--tronco-oscuro);
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.mensaje-feedback-oculto {
+    display: none;
+}
+
+.mensaje-feedback-error {
+    display: block;
+    background-color: var(--alerta-error-bg);
+    color: var(--alerta-error-texto);
+    border: 1px solid var(--alerta-error-texto);
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.pie-pagina {
+    background-color: var(--bosque-oscuro);
+    color: var(--verde-claro);
+    text-align: center;
+    padding: 20px;
+    border-top: 6px solid var(--hoja-verde);
+    margin-top: 40px;
+}

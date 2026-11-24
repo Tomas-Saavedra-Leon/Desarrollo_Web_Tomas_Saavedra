@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Avistamientos</title>
+    <link rel="stylesheet" href="/css/buscador.css">
+</head>
+<body>
+
+    <header class="cabecera-principal">
+        <div class="nav-izquierda">
+            <span class="logo-titulo">Buscador de Avistamientos</span>
+        </div>
+        <div class="nav-derecha">
+            <a href="http://localhost:5000/" class="btn-nav">Volver al Sistema</a>
+        </div>
+    </header>
+
+    <main class="contenido-central">
+        <div class="contenedor-tarjeta">
+            <h1 class="titulo-seccion text-center">Búsqueda y Evaluación de Avistamientos</h1>
+
+            <form id="form-busqueda" class="formulario-busqueda">
+                <div class="grupo-input">
+                    <label for="campo-busqueda">Buscar avistamientos:</label>
+                    <input type="text" id="campo-busqueda" name="campo-busqueda"
+                           placeholder="Escriba el nombre del ave, voluntario o comuna..."
+                           autocomplete="off">
+                </div>
+            </form>
+
+            <div id="contenedor-resultados" class="contenedor-resultados">
+                <div id="mensaje-estado" class="mensaje-estado">
+                    Ingrese un término para buscar avistamientos (por ave, voluntario o comuna).
+                </div>
+
+                <div class="tabla-contenedor">
+                    <table id="tabla-resultados" class="tabla-avistamientos tabla-oculta">
+                        <thead>
+                            <tr>
+                                <th scope="col">Voluntario</th>
+                                <th scope="col">Día</th>
+                                <th scope="col">Ave</th>
+                                <th scope="col">Comuna</th>
+                                <th scope="col">Nota Promedio</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-resultados">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-evaluar" class="modal-overlay modal-oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+        <div class="modal-caja">
+            <h2 id="titulo-modal" class="modal-titulo">Evaluar Avistamiento</h2>
+            <p id="modal-descripcion-avistamiento" class="modal-descripcion"></p>
+
+            <div id="feedback-evaluacion" class="mensaje-feedback-oculto"></div>
+
+            <form id="form-evaluacion">
+                <input type="hidden" id="evaluar-avistamiento-id">
+
+                <div class="grupo-input">
+                    <label for="selector-nota">Seleccione una Nota (1 a 7):</label>
+                    <select id="selector-nota" name="selector-nota" required>
+                        <option value="">Seleccione una nota</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+
+                <div class="modal-botones">
+                    <button type="submit" class="btn-principal" id="btn-guardar-nota">Guardar Evaluación</button>
+                    <button type="button" class="btn-secundario" id="btn-cancelar-nota">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="pie-pagina">
+        <p>Sistema de Avistamiento de Aves de Chile</p>
+        <p><small>Preservando nuestra fauna local</small></p>
+    </footer>
+
+    <script src="/js/buscador.js"></script>
+</body>
+</html>
